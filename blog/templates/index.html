@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'images/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MerkProjects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Boxicon awesome icon -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"">
+  </head>
+  <body>
+
+    <!-- header -->
+    <header>
+      <nav class = "navbar">
+        <div class = "container">
+          <a href = "{% url 'blog:home' %}" class = "navbar-brand">MerkProjects</a>
+          <div class = "navbar-nav">
+            <a href = "{% url 'blog:home' %}">home</a>
+            <a href = "{% url 'blog:articles' %}">Projects</a>
+          </div>
+        </div>
+      </nav>
+      <div class = "banner">
+        <div class = "container">
+          <h1 class = "banner-title">
+            <span style="color:#CC0000">Think,</span> And Do
+          </h1>
+          <p style="color:white">Hopefully you enjoy some of the stuff I have made so far!</p>
+        </div>
+      </div>
+    </header>
+    <!-- end of header -->
+    
+    <!-- featured -->
+    <section class = "featured" id = "featured">
+      <div class = "container">
+        <div class = "title">
+          <h2>Featured Projects</h2>
+        </div>
+
+        <div class = "featured-content">
+          {% for article in articles %}
+          <!-- item -->
+          <div class = "featured-item">
+            <div class = "featured-img">
+              <a href="{{ article.get_absolute_url }}">
+                <img src = "{{ article.image.url }}" alt = "" >
+                <span><i class='bx bx-calendar-star'></i>{{ article.publish|date:"M Y" }}</span>
+                <span>{{ article.sub_headline }}</span>
+              </a>
+            </div>
+            <div class = "featured-title">
+              <a href = "{{ article.get_absolute_url }}">{{ article.headline }}</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          {% empty %}
+			      <h3>No Featured Articles at the Moment...</h3>  
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <!-- end of featured -->
+
+    <!-- about -->
+    <section class = "about" id = "about">
+      <div class = "container">
+        <div class = "about-content">
+          <div>
+            <img src = "{% static 'images/about.jpg' %}" alt = "">
+          </div>
+          <div class = "about-text">
+            <div class = "title">
+              <h2>Evan Merkel</h2>
+              <p>Computer and Electrical Engineer</p>
+            </div>
+            <p>Ever since I was a kid, I have had a passion for tinkering around with pretty much anything I could get my hands on. I still remember my first computer class; I was the only one who was more interested in what was going on inside instead of what was being displayed on the screen. My love for technology led me to start taking apart and building computers at ten years old, game design camps at CMU, and the robotics club during my elementary and middle school years. Driven by curiosity, I had found a passion that has followed well into my college experience.</p>
+            <p>Currently, I intend to stay at NC State and continue into the accelerated master's program, specializing in VLSI systems. My overall goal is to become an ASIC/FPGA design verification engineer. I have experience with JavaScript, Python, C, C++, assembly, verilog, and more. Also, I am working on several projects to become more proficient in coding and different frameworks. I am still building this website. I will be using it to keep track of, document, and display any projects throughout my journey as an ECE student. Hopefully throughout time I can really make this site my own! Right now, I am working a Full-Time job as a systems engineer in conjunction with my school's Co-op program.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end of about -->
+
+    <!-- footer -->
+    <footer>
+      <div class = "social-links">
+        <a href = "https://www.linkedin.com/in/evanmerkel"><i class='bx bxl-linkedin'></i></a>
+        <a href = "https://github.com/merk0"><i class='bx bxl-github'></i></a>
+        <a href = "https://www.facebook.com/evan.merkel.73"><i class='bx bxl-facebook'></i></a>
+        <a href = "https://www.instagram.com/merkelevan"><i class='bx bxl-instagram'></i></a>
+      </div>
+      <span>MerkProjects 2022</span>
+    </footer>
+    <!-- end of footer -->
+    
+    
+  </body>
+</html>

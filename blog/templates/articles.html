@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'images/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MerkProjects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Boxicon awesome icon -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"">
+    
+  </head>
+  <body>
+
+    <!-- header -->
+    
+    <nav class = "navbar">
+        <div class = "container">
+          <a href = "{% url 'blog:home' %}" class = "navbar-brand">MerkProjects</a>
+          <div class = "navbar-nav">
+            <a href = "{% url 'blog:home' %}">home</a>
+            <a href = "{% url 'blog:articles' %}">Projects</a>
+          </div>
+        </div>
+    </nav>
+    
+    <!-- end of header -->
+
+    <div class = "container">
+        <div class = "title">
+          <h2>All Articles</h2>
+        </div>
+        <form method="GET">
+          <input type="text" id="query" name="query" class="textbox" placeholder="Search">
+          <button type = "submit" class="button">
+            <i class='bx bx-search'></i>
+          </button>
+        </form>
+        <div class="article-meta">
+            <a class="back-button" href="{% url 'blog:articles' %}">All Articles</a>
+            {% for tag in tags %}
+            <span class="tag"><a href="#">{{ tag.name }}</a></span>
+            {% endfor %}
+        </div>
+
+        <hr>
+
+        <div class = "featured-content">
+          {% for article in articles %}
+          <!-- item -->
+          <div class = "featured-item">
+            <div class = "featured-img">
+              <a href="{{ article.get_absolute_url }}">
+                <img src = "{{ article.image.url }}" alt = "">
+                <span><i class='bx bx-calendar-star'></i>{{ article.publish|date:"M Y" }}</span>
+                <span>{{ article.sub_headline }}</span>
+              </a>
+            </div>
+            <div class = "featured-title">
+              <a href = "{{ article.get_absolute_url }}">{{ article.headline }}</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          {% empty %}
+			      <h3>No Article found...</h3>  
+          {% endfor %}
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer>
+      <div class = "social-links">
+        <a href = "https://www.linkedin.com/in/evanmerkel"><i class='bx bxl-linkedin'></i></a>
+        <a href = "https://github.com/merk0"><i class='bx bxl-github'></i></a>
+        <a href = "https://www.facebook.com/evan.merkel.73"><i class='bx bxl-facebook'></i></a>
+        <a href = "https://www.instagram.com/merkelevan"><i class='bx bxl-instagram'></i></a>
+      </div>
+      </div>
+      <span>MerkProjects 2022</span>
+    </footer>
+    <!-- end of footer -->
+    
+    
+  </body>
+</html>
